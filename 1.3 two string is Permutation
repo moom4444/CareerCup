@@ -1,0 +1,90 @@
+/*
+先把一个字符串转为有序的对应 ascII 码的整数数组 
+再把另一个string中的每一个元素都到这个数组中查找，如果每个都查找到那就permutation
+*/
+
+package String;
+
+public class Permutation {
+	public static void main(String[] args) {
+		String str1 = "abcd  ";
+		String str2 = "bcda  ";
+		
+		if(isPer(str1,str2)){
+			System.out.println("is permutation");
+		}else{
+			System.out.println("no");
+		}
+	}
+	
+	public static boolean isPer(String str1, String str2)
+	{
+		int len1 = str1.length();
+		int len2 = str2.length();
+		if(len2 != len1 || str1==null || str2==null) return false;
+		else{
+			//transfer str2 to arrary
+			int[] arr  = new int[str2.length()];
+			strTonum(str2,arr);
+			sort(arr);
+			for(int i=0;i<len1;i++)
+			{
+				char a = str1.charAt(i);
+				
+				//在数组中找是否存在
+				if(!binarySearch(a, arr)) return false;
+				
+				
+			}
+			return true;
+		}
+	}
+	
+	//把一个字符串每个字母转化成数字放入数组中 
+	public static void strTonum(String str, int[] arr)
+	{
+		
+		for(int i=0;i<str.length();i++)
+		{
+			 int a = str.charAt(i);
+			 arr[i] = a;
+		}
+		
+	}
+	
+	public static void sort(int[] arr)
+	{
+		for(int i=0;i<arr.length-1;i++)
+		{
+			for(int j=0;j<arr.length-1-i;j++)
+			{
+				if(arr[j]>arr[j+1])
+				{
+					int temp = arr[j+1];
+					arr[j+1] = arr[j];
+					arr[j] =temp;
+				}
+			}
+		}
+	}
+	
+	public static boolean binarySearch(char a, int[] arr)
+	{
+		int key = a;
+		
+		int mid = 0;
+		int low =0;
+		int high = arr.length-1;
+		while(true)
+		{
+			mid = (high+low)/2;
+			if(arr[mid] == key) return true;
+			else if( low>high) return false;
+			else{
+				if(arr[mid]<key) low = mid+1;
+				else high = mid-1;
+			}
+		}
+		
+	}
+}
