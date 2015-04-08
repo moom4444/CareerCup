@@ -1,0 +1,52 @@
+/*
+ * 
+ * reverse a null-terminated string 
+ 用两个数组来完成 一个作为空数组准备用来接翻转后的字符
+ 
+ */
+package String;
+
+public class ReverseStr {
+	public static void main(String[] args) {
+		String str = null;
+		String out = reverse(str);
+		
+		if(out ==null){
+			System.out.println("null");
+		}else{
+			System.out.println(out);
+		}
+		
+		
+	}
+	
+	public static String reverse(String str)
+	{
+		if(str==null) return null;
+		int len = str.length();
+		char[] arr1 = new char[len];
+		char[] arr2 = new char[len];
+		int i=0;
+		int j=0;
+		for(; i<len;i++)
+		{
+			arr1[i] = str.charAt(i);
+			
+		}
+		while(i>0)
+		{
+			
+			arr2[--i] = arr1[j++];
+			
+		}
+		
+		String out = "";
+		for(int k=0;k<len;k++)
+		{
+			out += arr2[k];
+		}
+		
+		return out;
+		
+	}
+}
