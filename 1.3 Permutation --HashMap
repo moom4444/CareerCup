@@ -1,0 +1,58 @@
+/*
+ * 用hashmap来存储，先存储第一个string 然后我们用字符作为key
+ * 而value则表示 这个字符重复的次数
+ * 我们再比较中，如果找到来这个字符存在就把value减小1 然后再进行比较
+ * 一直到最后都比较完了，返回true
+ */
+package String;
+import java.util.*;
+public class Permutation_1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str1 = "acda  ";
+		String str2 = "cada  ";
+		
+		if(isPer(str1,str2)){
+			System.out.println("is permutation");
+		}else{
+			System.out.println("no");
+		}
+	}
+	
+	public static boolean isPer(String str1, String str2)
+	{
+		
+		if(str1==null||str2==null|| str1.length()!=str2.length())
+			return false;
+		Map<Character, Integer> counter = new HashMap();
+		
+		//完成放入到 map中，如果有的字符有多个，＋＋
+		for(int i=0;i<str1.length();i++)
+		{
+			char a = str1.charAt(i);
+			if(counter.containsKey(a)){
+				counter.put(a, counter.get(a)+1);
+			}else{
+				counter.put(a, 1);
+			}
+		}
+		
+		for(int i=0;i<str2.length();i++)
+		{
+			char a = str2.charAt(i);
+			//contain the chacter
+			if(counter.containsKey(a))
+			{
+				counter.put(a, counter.get(a)-1);
+			}else{
+				return false;
+			}
+		}
+		
+		return true;
+		
+		
+	}
+
+}
