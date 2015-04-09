@@ -1,0 +1,39 @@
+/*
+用2个布尔数组进行标记，如果在原来的数组中，碰到了就直接设置为true
+再次循环数组然后，对boolean array进行，true就把原来的数组行或列重置为0
+
+*/
+
+public static void solution(int[][] arr){
+		int N = arr.length;
+		int K = arr[0].length;
+		boolean[] row = new boolean[N];
+		boolean[] column = new boolean[K];
+		
+		for(int i=0;i<N;i++)
+			for(int j=0;j<K;j++)
+			{
+				if(arr[i][j]==0)
+				{
+					row[i] = true;
+					column[j] = true;
+					
+				}
+			}
+		
+		/**
+		 * 用两个布尔数组来标记，如果有一个true那就是这行都为0
+		 * 判断的时候就直接再本行内全为0
+		 */
+		for(int i=0;i<N;i++)
+		{
+			for(int j=0;j<K;j++)
+			{
+				if(row[i]||column[j])
+				{
+					arr[i][j] =0;
+				}
+			}
+		}
+		
+	}
