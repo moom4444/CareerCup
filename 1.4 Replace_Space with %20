@@ -1,0 +1,64 @@
+/*
+先去空格找到最后一个字母是什么
+然后再截取从开始到最后的字符串
+对新的字符串进行遍历，遇到空格就 替换成％20
+*/
+
+package String;
+
+public class ReplaceSpace {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String  str =" av klsajdf ";
+		System.out.println(solution(str));
+	}
+	
+	
+	public static String  solution(String str)
+	{
+		
+		if(str == null) return null;
+		if(str.length()==0) return null;
+		if(str.length()==1||str.equals(" ")) 
+		{
+			str = "%20";
+			return str;
+		}
+			String newStr = str.trim();
+		int len = newStr.length();
+		//get the last character
+		char last = newStr.charAt(len-1);
+		
+		//get the last character index of old str
+		int index_old_last = str.lastIndexOf(last);
+		//get the length between the last character and last space
+		//int len_old = str.length();
+		//int gap = str.length() - index_old_last-1;
+		
+		String str2 = str.substring(0, index_old_last+1);
+		
+		String[] arr = new String[str.length()];
+		for(int i=0; i<str2.length();i++)
+		{
+			String a = str2.charAt(i)+"";
+			if(a.equals(" ")){
+				
+				arr[i] = "%20";
+			}else{
+				arr[i] = a;
+			}
+			
+			
+		}
+		
+		String out = "";
+		for(int i=0; i<str2.length();i++)
+		{
+			out+= arr[i];
+		}
+		return out;
+		
+	}
+
+}
