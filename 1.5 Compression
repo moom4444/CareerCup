@@ -50,7 +50,62 @@ public class Compression {
 		char top = stack.pop();
 		out += top;
 		out += count+"";
+		if(out.length()<=str.length())
 		return out;
+		return str;
 	}
 
+}
+
+
+/*
+ * Implement a method to perform basic string compression using the counts
+of repeated characters. For example, the string aabcccccaaa would become
+a2blc5a3. If the "compressed" string would not become smaller than the original
+string, your method should return the original string
+ 
+ * Algorithm :
+ * Brute force 
+ * go through the String  to  count the repeat sequence and   put   char+count to new string
+ * compare the length of new string and  original string to decide which one  is returned 
+ *
+ *O(n) and O(n)
+ * after read the book  solution find  this 
+ * because string concatenation operates in 0(n^2)
+ * so it is o(n^2)
+ *
+ */
+public class CompressString_1_5 {
+ 
+	public static void main(String[] args) {
+		String  originalStr="aabcccccaaa";
+		String compressedStr = compressStr(originalStr);
+		if(compressedStr!=null)
+			System.out.println(compressedStr);
+ 
+	}
+ 
+	private static String compressStr(String originalStr) {
+		if(originalStr==null || originalStr.length()==0)
+			return  originalStr;
+		String resultSt="";
+		char curchar=originalStr.charAt(0);
+		int count =1;
+		for(int i=1;i<originalStr.length();i++){
+			if(originalStr.charAt(i)== curchar){
+				count++;
+			}
+			else{
+				resultSt+=curchar+""+count;
+				curchar=originalStr.charAt(i);
+				count =1;
+			}
+		}
+		resultSt+=curchar+""+count;
+		if(resultSt.length()<=originalStr.length())
+			return resultSt;
+		return originalStr;
+		
+	}
+ 
 }
