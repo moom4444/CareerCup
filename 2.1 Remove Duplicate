@@ -1,0 +1,22 @@
+/*
+用hashtable来存储，不重复的值，当在hashtable中没有找到重复的值的时候
+我们加入table中，当遇到重复的时候，我们就绕过链表当前的值
+
+*/
+
+public static  void solution(Node linklist)
+	{
+		Hashtable hs = new Hashtable();
+		Node pre = linklist;
+		Node cur = linklist;
+		while(cur!=null)
+		{
+			if(hs.containsKey(cur.data)){
+				pre.next = cur.next;
+			}else{
+				hs.put(cur.data, true);
+				pre = cur;
+			}
+			cur = cur.next;
+		}
+	}
