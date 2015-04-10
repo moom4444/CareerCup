@@ -1,0 +1,43 @@
+/*
+用双端链表来完成
+我们先创建一个双端链表，我们比较原来链表中值与给定值的大小
+大于给值就向后插入
+小于就向前插入
+注意最后一定一定把尾部 重新设为null
+*/
+
+public static void solution(int value,Node1 first)
+	{
+		Node1 one, last;
+		one=null;
+		last = null;
+		Node1 current = first;
+		int n=0;
+		while(current!=null)
+		{
+			if(current.data>=value)
+			{
+				if(last==null)
+				{
+					last = current;
+					one = current;
+				}else{
+					last.next=current;
+					last = current;
+					//System.out.println(last.data);
+				}
+			}else{
+				if(one==null){
+					one = current;
+					last = current;
+				}else{
+					Node1 node = new Node1(current.data);
+					node.next=one;
+					one = node;
+				}
+			}
+			current = current.next;
+			
+		}
+		last.next = null; // 一定要做截断
+}
