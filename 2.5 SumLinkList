@@ -103,6 +103,17 @@ Output: 9 -> 1 -> 2.That is, 912
 				cur1 = cur1.next;
 			}
 		}
+		/*
+		如果最后的2个数字相加仍然是大于10的，那我们就在新的linklist中插入一个新节点
+		然后这个节点的数据就是carry
+		*/
+		if(carry == 1)
+		{
+			node last = new node(1);
+			cur3.next = last;
+			
+		}
+		
 		return first;
 	}
 }
