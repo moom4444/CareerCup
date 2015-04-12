@@ -1,0 +1,69 @@
+/*
+solution 1 :use a new linklist to store the reverse of original linklist and then iterator the two linklist 
+if two node doesnot match with other, return false 
+
+solution 2: We compare the fist half of the linklist with the second half, use fast and slow point to iterator the linklist. we  push the data of slow point to the stack. 
+then comparing the pop of stack with the list of linklist
+*/
+
+public static boolean solution1(Lian first)
+	{
+		Lian cur = first;
+		Lian new_first = null;
+		while(cur!=null)
+		{
+			if(new_first == null) {
+				new_first = new Lian(cur.data);
+			}
+			else{
+				Lian now = new Lian(cur.data);
+				now.next = new_first;
+				new_first = now;
+			}
+			cur = cur.next;
+		}
+		cur=first;
+		Lian new_cur = new_first;
+		while(new_cur!=null||cur!=null)
+		{
+			if(new_cur.data!=cur.data) return false;
+			new_cur = new_cur.next;
+			cur = cur.next;
+		}
+		
+		
+		return true;
+	}
+	
+	public static boolean solution2(Lian first)
+	{
+		Stack<Character> stack = new Stack<>();
+		Lian fast = first;
+		Lian slow = first;
+		/*
+		 * we use fast point(the step is two) the step of point is one
+		 * if the loop is end means that the slow point the middle of linklist
+		 * 
+		 */
+		while(fast!=null || fast.next!= null)
+		{
+			stack.push(slow.data);
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		/*
+		 * if the linklist is odd, the slow point in the position of the 
+		 * middle of linklist. we need to move next so that we can compare
+		 * rest of linklist 
+		 */
+		if(fast!=null)
+		{
+			slow = slow.next;
+		}
+		
+		while(slow!=null)
+		{
+			if(slow.data != stack.pop()) return false;
+		}
+		return true;
+	}
