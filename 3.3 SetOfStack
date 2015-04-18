@@ -36,6 +36,18 @@ class Solution{
 			return cur.stack.pop();
 		}
 	}
+	
+	public int popAt(int index)
+	{
+		int num = 1;
+		Link cur = first;
+		while(num != index){
+			cur = cur.next;
+			num++;
+		}
+		
+		return cur.stack.pop();
+	}
 }
 
 class Link
