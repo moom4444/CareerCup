@@ -1,0 +1,51 @@
+/*
+implement a stack when the stack beyond the given size, we must create a new stack. 
+i use the double linklist to implement the stack. for example, capcity is 10. when the stack is lager than 10, we create
+a new stack and then add to the linklist. 
+when do pop, i must test the size of the current link, if the current link is not empty, i pop. if not, let the current point
+point the previous one and then continue to pop
+*/
+
+class Solution{
+	Link first = new Link();
+	Link cur = first;
+	int capcity = 10;
+	int count=1;
+	public void push(int value)
+	{
+		// stack is full in the linklist
+		if(cur.stack.size() == 10)
+		{
+			
+			Link link = new Link();
+			link.pre = cur;
+			cur.next = link;
+			cur = cur.next;	
+		}else{
+			cur.stack.push(value);
+		}
+	}
+	
+	
+	public int pop(){
+		if(!cur.stack.isEmpty())
+		{
+			return cur.stack.pop();
+		}else{
+			cur = cur.pre;
+			return cur.stack.pop();
+		}
+	}
+}
+
+class Link
+{
+	public Stack<Integer> stack;
+	public Link next;
+	public Link pre;
+	
+	public Link() {
+		stack = new Stack();
+		// TODO Auto-generated constructor stub
+	}
+}
