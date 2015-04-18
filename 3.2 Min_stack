@@ -1,0 +1,54 @@
+How would you design a stack which, in addition to push and pop, also hasa function min which returns the minimum element? 
+Push, pop and min should all operate in O(1) time.
+
+/*
+* use additional stack to stor the minimun number. 
+   the normal stack is used to fininsh the normal push and pop. but we need to compare the value with stack2 
+   if the value smaller stack2,we need to push the value into stack2 otherwise we push the value into stack1
+   
+   when we do pop, we need to compare the stack1 with min() 
+*/
+
+/*
+	 * 
+	 * 用两个stack来存储数据，第一个stack实现正常的压栈和出栈
+	 * 第二个存储最小的值，每当有要压入新的值时，都要和s2中栈顶数进行比较
+	 * 如果比s2的数字还小，就直接入s2，如果每有s2小，就正常进入s1
+	 * 出栈的时候，我们也要比较s1.pop with min() 
+	 */
+	public class solution
+	{
+		Stack<Integer> s1 = new Stack<Integer>();
+		Stack<Integer> s2 = new Stack<Integer>();
+		
+		public void push(int value)
+		{
+			if(s1.isEmpty())
+			{
+				s1.push(value);
+			}else{
+				int a = s1.pop();
+				if(value<a)
+				{
+					s2.push(value);
+				}
+				s1.push(value);
+			}
+		}
+		
+		public int pop(){
+			int a = s1.pop();
+			if(a == min()){
+				s2.pop();
+			}
+			return a;
+		}
+		
+		public int min()
+		{
+			if(s2.isEmpty()) return -1;
+			else {
+				return s2.pop();
+			}
+		}
+	}
