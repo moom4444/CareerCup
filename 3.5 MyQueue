@@ -28,4 +28,24 @@ class MyQueue{
           return stack2.pop()
       }
     }
+    
+    /*
+    我们专门写一个换栈的函数，来完成outQueue中的换栈的过程
+    */
+    public void shiftQueue()
+    {
+        if(stack2.isEmpty())
+        {
+            while(!stack1.isEmpty())
+            {
+                stack2.push(stack1.pop());
+            }
+        }
+    }
+    
+    public int peekQueue()
+    {
+        shiftQueue();
+        return stack2.pop();
+    }
 }
