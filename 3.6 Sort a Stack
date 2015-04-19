@@ -1,0 +1,54 @@
+/*
+sort a stack by only using an additional stack. 
+the additional stack have the normal function like:pop, push, peek, isEmpty
+
+思路：用第二个数组作为缓冲，我们每次弹出一个数字从original中，然后和buffer中的top进行比较
+如果original中的数字比 top大，那就直接压入的 buffer
+如果original中的数字比top 小，那么我们就要找到buffer中找，直到找到 比original中小的那个数的位置
+*/
+
+public static Stack<Integer> Sort(Stack<Integer> original)
+{
+    int count =0; // counting the number of comparation
+    if(original.size()==0) return null;
+    Stack<Integer> buffer = new Stack<Integer>();
+    while(!original.isEmpty())
+    {
+      int top = original.pop();
+      if(buffer.isEmpty()) buffer.push(top);
+      // call the function to find the correct position which we will push the data from original to buffer.
+      else{
+        count = find_swap();
+        while(count!=0)
+        {
+          buffer.push(original.pop());
+          count--;
+        }
+      }
+    }
+}
+
+public static int find_swap(int top, Stack<Ingeter> original , Stack<Ingeter> buffer)
+{
+    int count =0;
+    int buffer_top =0;
+    while(!buffer.isEmpty())
+    {
+      buffer_top = buffer.pop();
+      if(top>buffer_top) {
+        buffer.push(buffer_top);
+        buffer.push(top);
+        break;
+      }else{
+        count++;
+        original.push(buffer_top);
+      }
+    }
+    // 如果buffer为空后，也没找到比自己小的那个数字，我们就把top 压入到buffer 中
+    if(top<buffer_top)
+    {
+      buffer.push(top);
+    }
+    
+    return count;
+}
