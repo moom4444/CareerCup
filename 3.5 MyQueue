@@ -1,0 +1,31 @@
+/**
+Implement a MyQueue class which implements a queue using two stacks. 
+用第一个stack1来完成入队列，
+用 stack2来完成出队列，当stack2为空时，我们就把stack1中的数据全部压入到stack2中，然后pop出一个
+当stack2不为空时，我们就直接从stack2中pop出
+*/
+
+class MyQueue{
+    Stack<Integer> stack1 = new Stack();
+    Stack<Integer> stack2 = new Stack();
+    
+    public void enQueue(int value)
+    {
+      stack1.push(value);
+    }
+
+    public int outQueue()
+    {
+      if(stack2.isEmpty)
+      {
+        while(!stack1.isEmpty())
+        {
+          int top = stack1.pop();
+          stack2.push(top);
+        }
+        return stack2.pop();
+      }else{
+          return stack2.pop()
+      }
+    }
+}
