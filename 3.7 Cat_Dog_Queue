@@ -1,0 +1,88 @@
+/*
+是先一个队列，队列里只有cat 和 dog
+队里是可以正常的从队头出，队尾插入，用户可以选择自己所要的是cat 或是 dog 但是不能挑选明确的指定的狗猫
+用 linklist来实现 ，我用的是双端linklist这样对于插入的速度有提高，不用每次都while找到最后一个
+
+*/
+class Node
+{
+    String type;
+    Node next;
+    
+    public Node()
+    {
+      
+    }
+    public Node(String name)
+    {
+      type = name;
+    }
+    
+}
+
+class Queue{
+  Node first = new Node();
+  Node last = new Node();
+  
+  public void enQueue(String value)
+  {
+    Node node = new Node(value);
+    if(first == null || last ==null)
+    {
+        first = node;
+        last = node;
+    }else{
+        last.next = node;
+        last = node;
+    }
+  }
+  
+  public Node deQueueAny()
+  {
+    Node cur = first;
+    first = cur.next;
+    return cur;
+  }
+  
+  public Node deQueueCat()
+  {
+    Node cur = first;
+    if(cur == null) return null;
+    if(cur.type.equals("cat")) 
+    {
+        first = cur.next;
+        return cur;
+    }
+    while(cur!=null && cur.type.equals("cat"))
+    {
+        pre =cur ;
+        cur = cur.next;
+    }
+    //说明找到最后我们都没找到队列中有cat
+    if(cur == null) return null;
+    
+    pre.next = cur.next;
+    return cur;
+  }
+  
+  public Node deQueueDog()
+  {
+     Node cur = first;
+    if(cur == null) return null;
+    if(cur.type.equals("dog")) 
+    {
+        first = cur.next;
+        return cur;
+    }
+    while(cur!=null && cur.type.equals("dog"))
+    {
+        pre =cur ;
+        cur = cur.next;
+    }
+    //说明找到最后我们都没找到队列中有dog
+    if(cur == null) return null;
+    
+    pre.next = cur.next;
+    return cur;
+  }
+}
